@@ -7,11 +7,9 @@ This module contains 2 classes
  - Wallet
  - WalletScout
 
- Wallet is used for manipulation of each dict within the Asset list returned by the Zapper API call
+ Wallet builds an object from key/value pairs passed as a dictionary. Should have more validation.
 
- WalletScout is mostly unnecessary as is but a class based approach will make it easier for future development.
-
- For now it simply accepts JSON data in some form during instantiation, parses the data, and populates a List of Wallet objects.
+ WalletScout is used to deserialize JSON, parse the data and build a list of Wallet objects from the zapper API call.
 
  Most of the class should be considered as private methods with the only real user interaction being instantiation and retrieval of _wallets list.
 
@@ -26,16 +24,15 @@ walletScout = WalletScout(json)
 # Iterate _wallets list attr
 # print each address and balance in USD
 for wallet in walletScout._wallets:
-    print('Address: ', wallet._address)
-    print('Balance (USD): ', wallet._balanceUSD)
+    print('Address: ', wallet.address)
+    print('Balance (USD): ', wallet.balanceUSD)
 
 # Iterates _wallets list attr
 # Sums balance in USD
 totalBalance = 0
 for wallet in walletScout._wallets:
-    totalBalance += wallet._balanceUSD
-
-print(totalBalance)
+    totalBalance += wallet.balanceUSD
+print('Total Balance (USD)', totalBalance)
 
 example result 1:
 Address:  0x111111111117dc0aa78b770fa6a738034120c302

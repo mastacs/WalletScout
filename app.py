@@ -17,30 +17,30 @@ walletScout = WalletScout(file)
 # Iterate _wallets list attr
 # print each address and balance in USD
 for wallet in walletScout._wallets:
-    print('Address: ', wallet._address)
-    print('Balance (USD): ', wallet._balanceUSD)
+    print('Address: ', wallet.address)
+    print('Balance (USD): ', wallet.balanceUSD)
 
 # Iterates _wallets list attr
 # Sums balance in USD
 totalBalance = 0
 for wallet in walletScout._wallets:
-    totalBalance += wallet._balanceUSD
+    totalBalance += wallet.balanceUSD
 print('Total Balance (USD)', totalBalance)
 
 # Simple printout of each wallet object and all attributes.
-for item in wallets:
+for item in walletScout._wallets:
     print("WALLET OBJECT")
-    print(item._type)
-    print(item._category)
-    print(item._address)
-    print(item._symbol)
-    print(item._decimals)
-    print(item._label)
-    print(item._img)
-    print(item._hide)
-    print(item._canExchange)
-    print(item._price)
-    print(item._balance)
-    print(item._balanceRaw)
-    print(item._balanceUSD)
+    print(item.type)
+    print(item.category)
+    print(item.address)
+    print(item.symbol)
+    print(item.decimals)
+    print(item.label)
+    print(item.img)
+    print(item.hide)
+    print(item.canExchange)
+    print(item.price)
+    print(item.balance)
+    print(item.balanceRaw)
+    print(item.balanceUSD)
     print("************")
