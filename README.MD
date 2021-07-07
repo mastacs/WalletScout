@@ -18,8 +18,10 @@ This module contains 2 classes
  Example usage:
 
  ```python
+from Wallets import Wallet, WalletScout
+
  #Creating the object, passing JSON data
- walletScout = WalletScout(json)
+walletScout = WalletScout(json)
 
 #Iterating the list of Wallet objects in _wallets
 for wallet in walletScout._wallets:
