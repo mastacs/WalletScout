@@ -18,12 +18,14 @@ This module contains 2 classes
  ```python
 from Wallets import Wallet, WalletScout
 
- #Creating the object, passing JSON data
-walletScout = WalletScout(json)
+ #Creating objects, passing JSON data
+zapperData0 = WalletScout(json0)
+
+zapperData1 = WalletScout(json1)
 
 # Iterate _wallets list attr
 # print each address and balance in USD
-for wallet in walletScout._wallets:
+for wallet in zapperData._wallets:
     print('Address: ', wallet.address)
     print('Balance (USD): ', wallet.balanceUSD)
 
