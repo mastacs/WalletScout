@@ -26,7 +26,7 @@ walletScout = WalletScout(json)
 #Iterating the list of Wallet objects in _wallets
 for wallet in walletScout._wallets:
     print('Address: ', wallet._address)
-    print('Balance (raw): ', wallet._balanceRaw)
+    print('Balance (USD): ', wallet._balanceUSD)
 
 totalBalance = 0
 for wallet in walletScout._wallets:
@@ -36,15 +36,15 @@ print(totalBalance)
 
 example result 1:
 Address:  0x111111111117dc0aa78b770fa6a738034120c302
-Balance (raw):  163706498447925745505
+Balance (USD):  378.1620114147085
 Address:  0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d
-Balance (raw):  5261462092496710734
+Balance (USD):  5.261462092496711
 Address:  0x028171bca77440897b824ca71d1c56cac55b68a3
-Balance (raw):  28344636483486713708
+Balance (USD):  28.344636483486713
 Address:  0x94d863173ee77439e4292284ff13fad54b3ba182
-Balance (raw):  16096597114486205404
+Balance (USD):  0.8932323670770684
 Address:  0x06af07097c9eeb7fd685c692751d5c66db49c215
-Balance (raw):  950000000000000000
+Balance (USD):  0.8925991
 ...
 
 example result 2:
