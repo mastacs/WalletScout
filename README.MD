@@ -43,6 +43,7 @@ Address:  0x94d863173ee77439e4292284ff13fad54b3ba182
 Balance (raw):  16096597114486205404
 Address:  0x06af07097c9eeb7fd685c692751d5c66db49c215
 Balance (raw):  950000000000000000
+...
 
 example result 2:
 Total Balance (USD) 1338.0863295425552
