@@ -1,80 +1,22 @@
 import sys, json
-from asset import Asset
+from wallet import Wallet
+from walletScout import WalletScout
 
-class Serialize:
-    def __init__(self, json):
-        self._json    = json
-
-    wallets = []
-
-    def loadWallets(self, dsData):
-        for key, value in dsData.items():
-            if isinstance(value, dict):
-                self.loadWallets(value)
-            else:
-                assets = value[0].get('assets')
-                if isinstance(assets, list):
-                    wallets = []
-                    for item in assets:
-                        asset = Asset(item.get('type'),
-                                      item.get('category'),
-                                      item.get('address'),
-                                      item.get('symbol'),
-                                      item.get('decimals'),
-                                      item.get('label'),
-                                      item.get('img'),
-                                      item.get('hide'),
-                                      item.get('canExchange'),
-                                      item.get('price'),
-                                      item.get('balance'),
-                                      item.get('balanceRaw'),
-                                      item.get('balanceUSD'))
-                        wallets.append(asset)
-                        
-
-    def getWallets(self):
-        data = json.load(self._json)
-        self.loadWallets(data)
-        return wallets
-
+# Mostly for testing, using cmd line argv for file I/O
+# ex. Call from cmd: python app.py Test.json
+# Drag and drop Test.json onto app.py
+# etc. This will likely be removed in future and replaced.
 if len(sys.argv) > 1:
     file = open(sys.argv[1])
 else:
     file = input("No file found. Enter path:")
 
-#json = json.load(file)
-wallets = []
-def getWallets(data):
-    for key, value in data.items():
-        if isinstance(value, dict):
-            getWallets(value)
-        else:
-            assets = value[0].get('assets')
-            if isinstance(assets, list):
-                wallets = []
-                for item in assets:
-                    asset = Asset(item.get('type'),
-                                  item.get('category'),
-                                  item.get('address'),
-                                  item.get('symbol'),
-                                  item.get('decimals'),
-                                  item.get('label'),
-                                  item.get('img'),
-                                  item.get('hide'),
-                                  item.get('canExchange'),
-                                  item.get('price'),
-                                  item.get('balance'),
-                                  item.get('balanceRaw'),
-                                  item.get('balanceUSD'))
-                    wallets.append(asset)
+walletScout = WalletScout(file)
 
-#getWallets(json)
-
-ds = Serialize(file)
-wallets = ds.getWallets()
+wallets = walletScout.getWallets()
 
 for item in wallets:
-    print("ASSET OBJECT")
+    print("WALLET OBJECT")
     print(item._type)
     print(item._category)
     print(item._address)
@@ -89,10 +31,3 @@ for item in wallets:
     print(item._balanceRaw)
     print(item._balanceUSD)
     print("************")
-
-
-#asset = Asset("Test Address",
-#              "Test Symbol",
-#              "Test Label",
-#              "Test RAW",
-#              "Test USD")
