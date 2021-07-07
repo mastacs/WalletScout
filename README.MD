@@ -23,11 +23,14 @@ from Wallets import Wallet, WalletScout
  #Creating the object, passing JSON data
 walletScout = WalletScout(json)
 
-#Iterating the list of Wallet objects in _wallets
+# Iterate _wallets list attr
+# print each address and balance in USD
 for wallet in walletScout._wallets:
     print('Address: ', wallet._address)
     print('Balance (USD): ', wallet._balanceUSD)
 
+# Iterates _wallets list attr
+# Sums balance in USD
 totalBalance = 0
 for wallet in walletScout._wallets:
     totalBalance += wallet._balanceUSD
