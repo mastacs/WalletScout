@@ -1,5 +1,5 @@
 import sys, json
-from Wallets import Wallet, WalletScout
+from WalletScout import Wallet, WalletScout
 
 # Mostly for testing, using cmd line argv for file I/O
 # ex. Call from cmd: python app.py Test.json

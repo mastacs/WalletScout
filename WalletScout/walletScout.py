@@ -36,9 +36,6 @@ class WalletScout:
         for key, value in dsData.items():
             if isinstance(value, dict):
                 self.__loadWallets(value)
-            else:
-                assets = value[0].get('assets')
-                if isinstance(assets, list):
-                    for item in assets:
-                        asset = Wallet(item)
-                        self._wallets.append(asset)
+            elif isinstance(value[0].get('assets'), list):
+                for item in value[0].get('assets'):
+                    self._wallets.append(Wallet(item))

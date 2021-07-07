@@ -1,1 +1,1 @@
-from .walletScout import WalletScout
+from .walletScout import WalletScout, Wallet
