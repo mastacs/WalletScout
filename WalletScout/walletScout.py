@@ -42,6 +42,3 @@ class WalletScout:
                     for item in assets:
                         asset = Wallet(item)
                         self._wallets.append(asset)
-
-    def getWallets(self):
-        return self._wallets
