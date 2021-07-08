@@ -1,6 +1,6 @@
 # Wallet Scout
 
-Zapper API parser written in `Python` version `3.9.5`
+Crypto API parser written in `Python` version `3.9.5`
 
 This module contains 2 classes
 
