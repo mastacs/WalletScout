@@ -54,13 +54,16 @@ Example Etherscan Balance Check Usage:
 import requests
 from WalletScout import Wallet
 
+# example API URL
 eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey="
 
+# Make the GET request
 response = requests.get(url = eth_url)
+# Convert Response object to JSON
 data = response.json()
-
+# Instantiate the Wallet object passing JSON data
 wallet = Wallet(data)
-
+# Access API response attributes. 
 print(wallet.result)
 
 Result:
