@@ -59,11 +59,9 @@ eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0x
 
 # Make the GET request
 response = requests.get(url = eth_url)
-# Convert Response object to JSON
-data = response.json()
-# Instantiate the Wallet object passing JSON data
-wallet = Wallet(data)
-# Access API response attributes. 
+# Instantiate the Wallet object passing response as JSON object
+wallet = Wallet(response.json())
+# Access API response attributes.
 print(wallet.result)
 
 Result:
