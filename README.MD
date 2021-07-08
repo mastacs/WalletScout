@@ -52,3 +52,23 @@ Balance (USD):  0.8925991
 example result 2:
 Total Balance (USD) 1338.0863295425552
 ```
+
+Example of how Zapper wallet data is structured:
+```json
+"assets": [
+  {
+    "type": "wallet",
+    "category": "wallet",
+    "address": "0x111111111117dc0aa78b770fa6a738034120c302",
+    "symbol": "1INCH",
+    "decimals": 18,
+    "label": "1INCH",
+    "img": "networks/ethereum/0x111111111117dc0aa78b770fa6a738034120c302.png",
+    "hide": false,
+    "canExchange": false,
+    "price": 2.31,
+    "balance": 163.70649844792575,
+    "balanceRaw": "163706498447925745505",
+    "balanceUSD": 378.1620114147085
+  },
+```
