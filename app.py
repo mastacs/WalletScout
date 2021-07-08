@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 import sys, json, requests
+=======
+import sys, json
+import requests
+>>>>>>> 6528e857ef9c85f7226ded475fc9d78b6e6591dd
 from WalletScout import Wallet, WalletScout
 
 eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey=E5MGA856SAMKAM548D9IZCSAF7EZ4YI5UH"
@@ -23,6 +28,7 @@ print(wallet.result)
 # ex. Call from cmd: python app.py Test.json
 # Drag and drop Test.json onto app.py
 # etc. This will likely be removed in future and replaced.
+"""
 if len(sys.argv) > 1:
     file = open(sys.argv[1])
 else:
@@ -31,21 +37,33 @@ else:
 # The only purpose of app.py is for testing both classes
 # and as usage examples.
 walletScout = WalletScout(file)
+"""
+eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey=E5MGA856SAMKAM548D9IZCSAF7EZ4YI5UH"
+
+response = requests.get(url = eth_url)
+
+print(response)
+print(type(response))
+
+data = response.json()
 
 # Iterate _wallets list attr
 # print each address and balance in USD
+"""
 for wallet in walletScout._wallets:
     print('Address: ', wallet.address)
     print('Balance (USD): ', wallet.balanceUSD)
-
+"""
 # Iterates _wallets list attr
 # Sums balance in USD
+"""
 totalBalance = 0
 for wallet in walletScout._wallets:
     totalBalance += wallet.balanceUSD
 print('Total Balance (USD)', totalBalance)
-
+"""
 # Simple printout of each wallet object and all attributes.
+"""
 for item in walletScout._wallets:
     print("WALLET OBJECT")
     print(item.type)
@@ -62,3 +80,4 @@ for item in walletScout._wallets:
     print(item.balanceRaw)
     print(item.balanceUSD)
     print("************")
+"""
