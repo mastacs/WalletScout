@@ -1,5 +1,23 @@
-import sys, json
+import sys, json, requests
 from WalletScout import Wallet, WalletScout
+
+eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey=E5MGA856SAMKAM548D9IZCSAF7EZ4YI5UH"
+
+response = requests.get(url = eth_url)
+
+"""
+print(response)
+print(type(response))
+
+data = response.json()
+print(data)
+print(type(data))
+"""
+
+wallet = Wallet(response.json())
+
+print(wallet.result)
+
 
 # Mostly for testing, using cmd line argv for file I/O
 # ex. Call from cmd: python app.py Test.json

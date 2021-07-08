@@ -13,10 +13,10 @@ This module contains 2 classes
 
  Most of the class should be considered as private methods with the only real user interaction being instantiation and retrieval of _wallets list.
 
- Example usage:
+ Example Zapper Usage:
 
  ```python
-from Wallets import Wallet, WalletScout
+from WalletScout import Wallet, WalletScout
 
  #Creating objects, passing JSON data
 zapperData0 = WalletScout(json0)
@@ -25,7 +25,7 @@ zapperData1 = WalletScout(json1)
 
 # Iterate _wallets list attr
 # print each address and balance in USD
-for wallet in zapperData._wallets:
+for wallet in zapperData0._wallets:
     print('Address: ', wallet.address)
     print('Balance (USD): ', wallet.balanceUSD)
 
@@ -42,15 +42,30 @@ Balance (USD):  378.1620114147085
 Address:  0xfc1e690f61efd961294b3e1ce3313fbd8aa4f85d
 Balance (USD):  5.261462092496711
 Address:  0x028171bca77440897b824ca71d1c56cac55b68a3
-Balance (USD):  28.344636483486713
-Address:  0x94d863173ee77439e4292284ff13fad54b3ba182
-Balance (USD):  0.8932323670770684
-Address:  0x06af07097c9eeb7fd685c692751d5c66db49c215
-Balance (USD):  0.8925991
 ...
 
 example result 2:
 Total Balance (USD) 1338.0863295425552
+```
+
+Example Etherscan Balance Check Usage:
+
+```python
+import requests
+from WalletScout import Wallet
+
+# example etherscan Account Balance API call
+eth_url = "https://api.etherscan.io/api?module=account&action=balance&address=0xddbd2b932c763ba5b1b7ae3b362eac3e8d40121a&tag=latest&apikey="
+
+# Make the GET request
+response = requests.get(url = eth_url)
+# Instantiate the Wallet object passing response as JSON object
+wallet = Wallet(response.json())
+# Access API response attributes.
+print(wallet.result)
+
+Result:
+40891626854930000000000
 ```
 
 Example of how Zapper wallet data is structured:

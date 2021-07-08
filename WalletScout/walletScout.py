@@ -1,5 +1,4 @@
 import json
-
 # Wallet class, auto generated from a passed dictionary.
 # It is being used to build objects from a list of dicts.
 
@@ -8,7 +7,6 @@ import json
 # Validation of CRUD
 # Full obj printout
 # Object to dict conversion method.
-
 class Wallet:
     def __init__(self, dict):
         for key, value in dict.items():
@@ -26,6 +24,7 @@ class WalletScout:
         self._jData   = jData
         self._dsData  = self.__deserializeData()
         self._wallets = []
+        self._
         self.__loadWallets(self._dsData)
 
     def __deserializeData(self):
