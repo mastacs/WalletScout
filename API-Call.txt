@@ -1,0 +1,5 @@
+Example Zapper API Call:
+
+https://api.zapper.fi/v1/protocols/tokens/balances?addresses[]=0x41146f3acB162FA19daC0cdC54C495a45c8aFefF&network=ethereum&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241 
+
+
