@@ -1,4 +1,3 @@
-from typing import Protocol
 from walletScout import Scout
 import requests
 
