@@ -12,7 +12,7 @@ protocols = [
 ]
 
 networks = [
-   "ethereum", "fantom"
+   "ethereum", "fantom", "polygon", "optimism", "xdai", "binance-smart-chain"
 ]
 
 def checkWalletsBalance(address, network):
