@@ -53,12 +53,12 @@ class ZapperQuery:
 def main():
    totalBalance = 0
    zapper = ZapperQuery(testAddress)
-   for results in zapper._walletAssets:
-      print("Token Contract Address: " + results.address)
-      totalBalance += results.balanceUSD
+   for asset in zapper._walletAssets:
+      print("Token Contract Address: " + asset.address)
+      totalBalance += asset.balanceUSD
    for totalProtocolAssets in zapper._protocolAssets:
-      for results in totalProtocolAssets:
-         for key, value in results.items():
+      for protocolAssets in totalProtocolAssets:
+         for key, value in protocolAssets.items():
             print("Protocol: " + key)
             for asset in value:
                print("Token: " + asset.label + " Contract Address: " + asset.address)
