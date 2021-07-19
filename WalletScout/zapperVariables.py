@@ -3,7 +3,7 @@
 #]
 
 zapper_protocols = [
-    "yearn"
+    "yearn", "alchemix"
 ]
 
 zapper_networks = [
