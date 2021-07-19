@@ -1,6 +1,5 @@
-import json, requests
+import json
 from os import path
-from zapperVariables import zapper_protocols, walletBalance_url, protocolBalance_url
 
 # ToDo:
 # Full obj printout
@@ -58,42 +57,5 @@ class Scout:
                 for item in value[0].get('assets'):
                     self._assets.append(Asset(item))
 
-
-class Zapper:
-   def __init__(self, address, network):
-       self._totalAssets = []
-       walletBalance = self.__checkWalletsBalance(address, network)
-       protocolBalance = self.__checkBalancePerProtocol(address, network)
-       for result in protocolBalance:
-           self._totalAssets.append(result)
-       for result in walletBalance._assets:
-           self._totalAssets.append(result)
-   
-   def __checkWalletsBalance(self, address, network):
-      response = requests.get(url = (
-         walletBalance_url % (
-            address,
-            network
-         )
-      ))
-      # Instantiate the Wallet object passing response as JSON object
-      return Scout(response.json())
-
-   def __checkBalancePerProtocol(self, address, network):
-      self.totalInProtocols = []
-      for protocol in zapper_protocols:
-         response = requests.get(url = (
-            protocolBalance_url % (
-               protocol,
-               address,
-               network
-            )
-         ))
-         
-         # Instantiate the Wallet object passing response as JSON object
-         perProtocol = Scout(response.json())
-         for asset in perProtocol._assets:
-             self.totalInProtocols.append(asset)
-      return self.totalInProtocols
     # Todo:
     # support for various API data.
