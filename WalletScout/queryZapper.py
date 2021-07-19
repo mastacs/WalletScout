@@ -10,7 +10,7 @@ class ZapperQuery:
       self._protocolAssets = []
       for network in zapper_networks:
          self._walletBalance = self.__checkWalletsBalance(address, network)
-         self._protocolBalance = self.__checkBalancePerProtocol(address, network)
+         self._protocolBalance = self.__checkWalletsProtocolBalance(address, network)
          for asset in self._walletBalance._assets:
             self._walletAssets.append(asset)
          self._protocolAssets.append(self._protocolBalance)
@@ -27,7 +27,7 @@ class ZapperQuery:
       # Instantiate the Wallet object passing response as JSON object
       return Scout(response.json())
 
-   def __checkBalancePerProtocol(self, address, network):
+   def __checkWalletsProtocolBalance(self, address, network):
       totalAssetsPerProtocol = []
       perProtocolAssets = {}
       for protocol in zapper_protocols:
