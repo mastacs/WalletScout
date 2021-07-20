@@ -5,6 +5,24 @@ from zapperVariables import zapper_protocols, zapper_networks, walletBalance_url
 
 class ZapperQuery:
    def __init__(self, address):
+      # Object Structure
+      #
+      # {self._totalZapperAssets:[{
+      #           "walletAssets": [{
+      #                 "network1": [{
+      #                       "asset1": [
+      #                             address
+      #                             balanceUSD
+      #                             etc
+      #
+      #           "protocolAssets": [{
+      #                    "network1": [{
+      #                       "protocol1": [{
+      #                             "asset1": [
+      #                                address
+      #                                balanceUSD
+      #                                etc
+      # 
       self._totalZapperAssets = {}
       self._walletAssets = []
       self._protocolAssets = []
@@ -14,8 +32,8 @@ class ZapperQuery:
          for asset in self._walletBalance._assets:
             self._walletAssets.append(asset)
          self._protocolAssets.append(self._protocolBalance)
-         self._totalZapperAssets['wallet'] = self._walletBalance._assets
-         self._totalZapperAssets['protocol'] = self._protocolBalance
+         self._totalZapperAssets['walletAssets'] = self._walletBalance._assets
+         self._totalZapperAssets['protocolAssets'] = self._protocolBalance
    
    def __checkWalletsBalance(self, address, network):
       response = requests.get(url = (
@@ -53,9 +71,11 @@ class ZapperQuery:
 def main():
    totalBalance = 0
    zapper = ZapperQuery(testAddress)
+   # Loop through wallet assets list
    for asset in zapper._walletAssets:
       print("Token Contract Address: " + asset.address)
       totalBalance += asset.balanceUSD
+   # Loop through protcol assets list
    for totalProtocolAssets in zapper._protocolAssets:
       for protocolAssets in totalProtocolAssets:
          for key, value in protocolAssets.items():
