@@ -3,37 +3,34 @@ from os import path
 from walletScout import Scout
 from zapperVariables import zapper_protocols, zapper_networks, walletBalance_url, protocolBalance_url, testAddress
 
+# {"walletAssets": {
+#       "network1": [{
+#           "asset1": [
+#                address
+#                balanceUSD
+#                etc
+#
+# ,"protocolAssets": {
+#       "network1": [{
+#          "protocol1": [{
+#              "asset1": [
+#                   address
+#                   balanceUSD
+#                   etc
+# 
+
 class ZapperQuery:
    def __init__(self, address):
-      # Object Structure
-      #
-      # {self._totalZapperAssets:[{
-      #           "walletAssets": [{
-      #                 "network1": [{
-      #                       "asset1": [
-      #                             address
-      #                             balanceUSD
-      #                             etc
-      #
-      #           "protocolAssets": [{
-      #                    "network1": [{
-      #                       "protocol1": [{
-      #                             "asset1": [
-      #                                address
-      #                                balanceUSD
-      #                                etc
-      # 
       self._totalZapperAssets = {}
-      self._walletAssets = []
-      self._protocolAssets = []
+      self._walletAssetsByNetwork = {}
+      self._protocolAssetsByNetwork = {}
       for network in zapper_networks:
          self._walletBalance = self.__checkWalletsBalance(address, network)
-         self._protocolBalance = self.__checkWalletsProtocolBalance(address, network)
-         for asset in self._walletBalance._assets:
-            self._walletAssets.append(asset)
-         self._protocolAssets.append(self._protocolBalance)
-         self._totalZapperAssets['walletAssets'] = self._walletBalance._assets
-         self._totalZapperAssets['protocolAssets'] = self._protocolBalance
+         self._protocolTokenBalance = self.__checkWalletsProtocolBalance(address, network)
+         self._walletAssetsByNetwork[network] = self._walletBalance._assets
+         self._protocolAssetsByNetwork[network] = self._protocolTokenBalance
+      self._totalZapperAssets['walletAssets'] = self._walletAssetsByNetwork
+      self._totalZapperAssets['protocolAssets'] = self._protocolAssetsByNetwork
    
    def __checkWalletsBalance(self, address, network):
       response = requests.get(url = (
@@ -57,7 +54,7 @@ class ZapperQuery:
                network
             )
          ))
-            # Instantiate the Wallet object passing response as JSON object
+         # Instantiate the Wallet object passing response as JSON object
          perProtocol = Scout(response.json())
          for asset in perProtocol._assets:
             assetsPerProtocol.append(asset)
@@ -68,20 +65,28 @@ class ZapperQuery:
     # support for various API data.
 
 
+
 def main():
-   totalBalance = 0
+   
+   # Pass testAddress to Zapper Class
    zapper = ZapperQuery(testAddress)
-   # Loop through wallet assets list
-   for asset in zapper._walletAssets:
-      print("Token Contract Address: " + asset.address)
-      totalBalance += asset.balanceUSD
-   # Loop through protcol assets list
-   for totalProtocolAssets in zapper._protocolAssets:
-      for protocolAssets in totalProtocolAssets:
-         for key, value in protocolAssets.items():
-            print("Protocol: " + key)
-            for asset in value:
-               print("Token: " + asset.label + " Contract Address: " + asset.address)
+
+   # Ex: Retrieving USD Balance of all assets in object
+   totalBalance = 0
+   for assetType, networks in zapper._totalZapperAssets.items():
+      # Two options (walletAssets, protocolAssets)
+      if assetType == "walletAssets":
+         for network in networks:
+            for asset in networks[network]:
                totalBalance += asset.balanceUSD
+      elif assetType == "protocolAssets":
+         for network in networks:
+            for protocols in networks[network]:
+               for protocol in protocols:
+                  for asset in protocols[protocol]:
+                     totalBalance += asset.balanceUSD
+      else:
+         print("Couldn't find assetType that met critera")
+         break
    print("Total Balance (USD): ", totalBalance)
 main()
