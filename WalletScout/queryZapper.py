@@ -3,32 +3,43 @@ from os import path
 from walletScout import Scout
 from zapperVariables import zapper_protocols, zapper_networks, walletBalance_url, protocolBalance_url, testAddress
 
-# {"walletAssets": {
-#       "network1": [{
-#           "asset1": [
-#                address
-#                balanceUSD
-#                etc
+
+# Object Structure:
 #
-# ,"protocolAssets": {
-#       "network1": [{
-#          "protocol1": [{
-#              "asset1": [
-#                   address
-#                   balanceUSD
-#                   etc
+#     {"walletAssets": {
+#           "network1": [{
+#                "asset1": [
+#                    address
+#                     balanceUSD
+#                     etc
+#
+#     ,"protocolAssets": {
+#           "network1": [{
+#              "protocol1": [{
+#                    "asset1": [
+#                       address
+#                       balanceUSD
+#                       etc
 # 
 
 class ZapperQuery:
    def __init__(self, address):
+      # Top level dictionary for all wallet assets + protocol token assets
       self._totalZapperAssets = {}
+      # All wallet assets
       self._walletAssetsByNetwork = {}
+      # All protocol token assets
       self._protocolAssetsByNetwork = {}
+      # Loop through Zappers supported networks
       for network in zapper_networks:
+         # Get wallet assets
          self._walletBalance = self.__checkWalletsBalance(address, network)
+         # Get protocol token assets
          self._protocolTokenBalance = self.__checkWalletsProtocolBalance(address, network)
+         # Add results to respective dictionary based on current network
          self._walletAssetsByNetwork[network] = self._walletBalance._assets
          self._protocolAssetsByNetwork[network] = self._protocolTokenBalance
+      # Add results to top level dictionary
       self._totalZapperAssets['walletAssets'] = self._walletAssetsByNetwork
       self._totalZapperAssets['protocolAssets'] = self._protocolAssetsByNetwork
    
@@ -45,8 +56,10 @@ class ZapperQuery:
    def __checkWalletsProtocolBalance(self, address, network):
       totalAssetsPerProtocol = []
       perProtocolAssets = {}
+      # Loop through supported Protocol
       for protocol in zapper_protocols:
          assetsPerProtocol = []
+         # Get results based on current Protocol/dApp and provided address/network
          response = requests.get(url = (
             protocolBalance_url % (
                protocol,
@@ -54,15 +67,18 @@ class ZapperQuery:
                network
             )
          ))
-         # Instantiate the Wallet object passing response as JSON object
+         # Instantiate the Wallet object via Scout class, passing response as object
          perProtocol = Scout(response.json())
+         # Loop through assets
          for asset in perProtocol._assets:
+            # Append asset to assets object
             assetsPerProtocol.append(asset)
+         # Add list of assets to dictionary with associated protocol being the key 
          perProtocolAssets[protocol] = assetsPerProtocol
+      # Append Protocols dictionary to list containing total Assets  
       totalAssetsPerProtocol.append(perProtocolAssets)
+      # Returns list of protocols 
       return totalAssetsPerProtocol
-    # Todo:
-    # support for various API data.
 
 def getZapperBalanceUSD(obj):
    # Ex: Retrieving USD Balance of all assets in object
