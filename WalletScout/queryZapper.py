@@ -64,16 +64,10 @@ class ZapperQuery:
     # Todo:
     # support for various API data.
 
-
-
-def main():
-   
-   # Pass testAddress to Zapper Class
-   zapper = ZapperQuery(testAddress)
-
+def getZapperBalanceUSD(obj):
    # Ex: Retrieving USD Balance of all assets in object
    totalBalance = 0
-   for assetType, networks in zapper._totalZapperAssets.items():
+   for assetType, networks in obj._totalZapperAssets.items():
       # Two options (walletAssets, protocolAssets)
       if assetType == "walletAssets":
          for network in networks:
@@ -89,4 +83,9 @@ def main():
          print("Couldn't find assetType that met critera")
          break
    print("Total Balance (USD): ", totalBalance)
+
+def main():
+   # Pass testAddress to Zapper Class
+   zapper = ZapperQuery(testAddress)
+   getZapperBalanceUSD(zapper)
 main()
