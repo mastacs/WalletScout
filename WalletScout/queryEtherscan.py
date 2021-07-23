@@ -1,9 +1,7 @@
 import requests
 from os import path
 from walletScout import Scout
-from zapperVariables import testAddress
-
-etherscan_url = "https://api.etherscan.io/api?module=account&action=%s&address=%s&startblock=0&endblock=999999999&sort=asc&apikey=M4SIQFEQ5D6KXNQMIZXF86MX2R8XAK5NDJ"
+from zapperVariables import testAddress, etherscan_url
 
 searchType = {
    "externalTx": "txlist",
