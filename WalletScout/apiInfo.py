@@ -14,6 +14,8 @@ zapper_networks = [
 #   "ethereum", "fantom", "polygon", "optimism", "xdai", "binance-smart-chain"
 #]
 
-walletBalance_url = "https://api.zapper.fi/v1/protocols/tokens/balances?addresses[]=%s&network=%s&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241"
-protocolBalance_url = "https://api.zapper.fi/v1/protocols/%s/balances?addresses[]=%s&network=%s&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241"
+zapper_walletBalance_url = "https://api.zapper.fi/v1/protocols/tokens/balances?addresses[]=%s&network=%s&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241"
+zapper_protocolBalance_url = "https://api.zapper.fi/v1/protocols/%s/balances?addresses[]=%s&network=%s&api_key=96e0cc51-a62e-42ca-acee-910ea7d2a241"
+etherscan_url = "https://api.etherscan.io/api?module=account&action=%s&address=%s&startblock=0&endblock=999999999&sort=asc&apikey=M4SIQFEQ5D6KXNQMIZXF86MX2R8XAK5NDJ"
+
 testAddress = "0x01e6fd0aE73D9194b19f9B376065577927A0D5f5"
