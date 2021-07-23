@@ -8,6 +8,10 @@ from os import path
 #   API calls
 #   Derivation
 #   Calculated information
+class Address: 
+    def __init__(self, key, value):
+        self._
+
 
 # Wallet class, auto generated from a passed dictionary.
 # It is being used to build objects from a list of dicts.
@@ -52,13 +56,15 @@ class Scout:
     def __loadAssets(self, dsData):
         for key, value in dsData.items():
             try:
-                if key == "result":
-                    for item in value:
-                        self._assets.append(Asset(item))
-                elif isinstance(value, dict):
+                if isinstance(value, dict):
                     self.__loadAssets(value)
+                elif value == 501:
+                    break
                 elif isinstance(value[0].get('assets'), list):
                     for item in value[0].get('assets'):
+                        self._assets.append(Asset(item))
+                elif key == "result":
+                    for item in value:
                         self._assets.append(Asset(item))
             except AttributeError:
                 continue
