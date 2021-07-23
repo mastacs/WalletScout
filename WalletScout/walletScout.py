@@ -1,4 +1,4 @@
-import json
+import json, sys
 from os import path
 
 # ToDo:
@@ -51,14 +51,17 @@ class Scout:
     # Grabs "assets" list containing wallet dictionaries. Builds list of wallet objects.
     def __loadAssets(self, dsData):
         for key, value in dsData.items():
-            if key == "result":
-                for item in value:
-                    self._assets.append(Asset(item))
-            elif isinstance(value, dict):
-                self.__loadAssets(value)
-            elif value[0] == 'assets':
-                for item in value[0].get('assets'):
-                    self._assets.append(Asset(item))
+            try:
+                if key == "result":
+                    for item in value:
+                        self._assets.append(Asset(item))
+                elif isinstance(value, dict):
+                    self.__loadAssets(value)
+                elif isinstance(value[0].get('assets'), list):
+                    for item in value[0].get('assets'):
+                        self._assets.append(Asset(item))
+            except AttributeError:
+                continue
 
     # Todo:
     # support for various API data.
