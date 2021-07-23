@@ -1,7 +1,7 @@
 import requests
 from os import path
 from walletScout import Scout
-from zapperVariables import zapper_protocols, zapper_networks, walletBalance_url, protocolBalance_url, testAddress
+from queryData import zapper_protocols, zapper_networks, walletBalance_url, protocolBalance_url, testAddress
 
 
 # Object Structure:
