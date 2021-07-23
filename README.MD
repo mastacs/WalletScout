@@ -4,14 +4,14 @@ Crypto API parser written in `Python` version `3.9.5`
 
 This module contains 2 classes
 
- - Wallet
- - WalletScout
+ - Asset
+ - Scout
 
- Wallet builds an object from key/value pairs passed as a dictionary. Should have more validation.
+ Asset builds an object from key/value pairs passed as a dictionary. Should have more validation.
 
- WalletScout is used to deserialize JSON, parse the data and build a list of Wallet objects from the zapper API call.
+ Scout is used to deserialize JSON, parse the data and build a list of Wallet objects from the API call.
 
- Most of the class should be considered as private methods with the only real user interaction being instantiation and retrieval of _wallets list.
+ Most of the class should be considered as private methods with the only real user interaction being instantiation and retrieval of _assets list.
 
  Example Zapper Usage:
 
@@ -70,7 +70,7 @@ Result:
 40891626854930000000000
 ```
 
-Example of how Zapper wallet data is structured:
+Example of how Zapper asset data is structured:
 ```json
 "assets": [
   {
