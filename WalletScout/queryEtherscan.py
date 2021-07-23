@@ -1,7 +1,7 @@
 import requests
 from os import path
 from walletScout import Scout
-from zapperVariables import testAddress, etherscan_url
+from queryData import testAddress, etherscan_url
 
 searchType = {
    "externalTx": "txlist",
