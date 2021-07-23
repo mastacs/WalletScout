@@ -1,17 +1,6 @@
 import json, sys
 from os import path
 
-# ToDo:
-# Full obj printout
-# Object to dict conversion method.
-# Support for required functionality:
-#   API calls
-#   Derivation
-#   Calculated information
-class Address: 
-    def __init__(self, key, value):
-        self._
-
 
 # Wallet class, auto generated from a passed dictionary.
 # It is being used to build objects from a list of dicts.
